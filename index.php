@@ -35,13 +35,13 @@ include 'config.php';
       }
       else
       {
-        if ($_GET['theme']=='light')
+        if ($_GET['theme']=='dark')
         {
-          echo '<link href="assets/css/bootstrap.min.css" rel="stylesheet">';
+          echo '<link href="assets/css/bootstrap-dark.min.css" rel="stylesheet">';
         }
         else
         {
-          echo '<link href="assets/css/bootstrap-dark.min.css" rel="stylesheet">';
+          echo '<link href="assets/css/bootstrap.min.css" rel="stylesheet">';
         }
       }
     ?>
