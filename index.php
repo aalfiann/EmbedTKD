@@ -79,6 +79,22 @@ include 'config.php';
           <div class="form-group text-center">
             <input name="submittarif" type="submit" class="btn btn-primary col-md-12 col-xs-12" value="CEK TARIF"></input>
           </div>
+
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <th>Produk</th>
+                  <th>Kelurahan Tujuan</th>
+                  <th>Kabupaten / Kota</th>
+                  <th>Biaya Kirim</th>
+                  <th>Estimasi</th>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         
         <!-- TAB RESI -->

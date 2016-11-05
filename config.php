@@ -10,6 +10,9 @@ $version = '1.0';
 //Author
 $author = 'M ABD AZIZ ALFIAN';
 
+//API TKD Express
+$api = "https://api.tkd.co.id/v2/";
+
 //Change this to true if website using ssl
 $ssl = false;
 $website = Protocol($ssl);
