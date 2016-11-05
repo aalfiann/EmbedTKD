@@ -14,7 +14,7 @@ $author = 'M ABD AZIZ ALFIAN';
 $api = "https://api.tkd.co.id/v2/";
 
 //Change this to true if website using ssl
-$ssl = false;
+$ssl = true;
 $website = Protocol($ssl,'EmbedTKD');
 
 //Show all error

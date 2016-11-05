@@ -51,7 +51,7 @@ include 'config.php';
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!--CSS untuk auto completion-->
-	  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />     
+	  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />     
 	
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -84,7 +84,7 @@ include 'config.php';
             {
               if ($data->{'status'} == "success")
               {
-                echo '<a href="'.$website.'?m=1&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
+                echo '<a href="'.$website.'/?m=1&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
                   <div class="col-md-12">
                     <div class="table-responsive">
                       <table class="table">
@@ -113,7 +113,7 @@ include 'config.php';
               }
               else
               {
-                echo '<a href="'.$website.'?m=1&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
+                echo '<a href="'.$website.'/?m=1&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
                 Message: '.$data->{'message'};
               }
             }
@@ -156,7 +156,7 @@ include 'config.php';
             {
               if ($data->{'status'} == "success")
               {
-                echo '<a href="'.$website.'?m=2&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
+                echo '<a href="'.$website.'/?m=2&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
                   <div class="col-md-12">
                     <div class="table-responsive">
                       <table class="table">
@@ -176,7 +176,7 @@ include 'config.php';
               }
               else
               {
-                echo '<a href="'.$website.'?m=2&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
+                echo '<a href="'.$website.'/?m=2&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
                 Message: '.$data->{'message'};
               }
             }
@@ -220,8 +220,8 @@ include 'config.php';
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     <!-- Start JQuery untuk completion-->
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script> 
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script> 
 		<script type="text/javascript">
 		$(function() {
     
