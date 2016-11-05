@@ -28,7 +28,24 @@ include 'config.php';
     <title><?=$sitetitle?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <?php
+      if (empty($_GET['theme']))
+      {
+        echo '<link href="assets/css/bootstrap.min.css" rel="stylesheet">';
+      }
+      else
+      {
+        if ($_GET['theme']=='light')
+        {
+          echo '<link href="assets/css/bootstrap.min.css" rel="stylesheet">';
+        }
+        else
+        {
+          echo '<link href="assets/css/bootstrap-dark.min.css" rel="stylesheet">';
+        }
+      }
+    ?>
+    
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -67,7 +84,7 @@ include 'config.php';
             {
               if ($data->{'status'} == "success")
               {
-                echo '<a href="'.$website.'?m=1" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
+                echo '<a href="'.$website.'?m=1&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
                   <div class="col-md-12">
                     <div class="table-responsive">
                       <table class="table">
@@ -96,7 +113,7 @@ include 'config.php';
               }
               else
               {
-                echo '<a href="'.$website.'?m=1" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
+                echo '<a href="'.$website.'?m=1&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
                 Message: '.$data->{'message'};
               }
             }
@@ -106,6 +123,7 @@ include 'config.php';
             echo '<form method="get" action="'.$_SERVER['PHP_SELF'].'">
               <div class="form-group" hidden>
                 <input name="m" type="text" class="form-control text-uppercase origin" value="1">
+                <input name="theme" type="text" class="form-control text-uppercase origin" value="'.((!empty($_GET['theme']))?$_GET['theme']:'').'">
               </div>
               <div class="form-group">
                 <label>Origin</label>
@@ -138,7 +156,7 @@ include 'config.php';
             {
               if ($data->{'status'} == "success")
               {
-                echo '<a href="'.$website.'?m=2" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
+                echo '<a href="'.$website.'?m=2&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
                   <div class="col-md-12">
                     <div class="table-responsive">
                       <table class="table">
@@ -158,7 +176,7 @@ include 'config.php';
               }
               else
               {
-                echo '<a href="'.$website.'?m=2" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
+                echo '<a href="'.$website.'?m=2&theme='.((!empty($_GET['theme']))?$_GET['theme']:'').'" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
                 Message: '.$data->{'message'};
               }
             }
@@ -168,6 +186,7 @@ include 'config.php';
             echo '<form method="get" action="'.$_SERVER['PHP_SELF'].'"> 
             <div class="form-group" hidden>
               <input name="m" type="text" class="form-control text-uppercase origin" value="2">
+              <input name="theme" type="text" class="form-control text-uppercase origin" value="'.((!empty($_GET['theme']))?$_GET['theme']:'').'">
             </div>
             <div class="form-group">
               <label>No Resi / Connote</label>
