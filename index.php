@@ -33,9 +33,6 @@ include 'config.php';
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="navbar.css" rel="stylesheet">
-
     <!--CSS untuk auto completion-->
 	  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />     
 	
@@ -51,8 +48,6 @@ include 'config.php';
 
     <div class="container">
 
-    <div>
-
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" <?php if($_GET['m']==1) echo 'class="active"'; else if(empty($_GET['m'])) echo 'class="active"';?>><a href="#tarif" aria-controls="tarif" role="tab" data-toggle="tab">CEK TARIF</a></li>
@@ -64,53 +59,130 @@ include 'config.php';
         <!-- TAB TARIF -->
         <div role="tabpanel" class="tab-pane <?php if($_GET['m']==1) echo 'active'; else if(empty($_GET['m'])) echo 'active';?>" id="tarif">
           <br>
-          <div class="form-group">
-            <label>Origin</label>
-            <input name="origin" type="text" class="form-control border-input text-uppercase origin" placeholder="KOTA ANDA" value="" required>
-          </div>
-          <div class="form-group">
-            <label>Destinasi</label>
-            <input name="destinasi" type="text" class="form-control border-input text-uppercase destinasi" placeholder="KOTA / KABUPATEN" value="" required>
-          </div>
-          <div class="form-group">
-            <label>Berat Kg</label>
-            <input name="berat" type="text" class="form-control border-input text-uppercase destinasi" placeholder="1" value="1" required>
-          </div>
-          <div class="form-group text-center">
-            <input name="submittarif" type="submit" class="btn btn-primary col-md-12 col-xs-12" value="CEK TARIF"></input>
-          </div>
-
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <th>Produk</th>
-                  <th>Kelurahan Tujuan</th>
-                  <th>Kabupaten / Kota</th>
-                  <th>Biaya Kirim</th>
-                  <th>Estimasi</th>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <?php if(isset($_GET['submittarif'])) 
+          {
+            $url = $api."?mode=tarif&origin=".urlencode($_GET['origin'])."&destinasi=".urlencode($_GET['destinasi'])."&weight=".$_GET['berat']."";	
+          	$data = json_decode(curl_get_contents($url));
+          	if (!empty($data))
+            {
+              if ($data->{'status'} == "success")
+              {
+                echo '<a href="'.$website.'?m=1" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <th>Produk</th>
+                          <th>Kelurahan Tujuan</th>
+                          <th>Kabupaten / Kota</th>
+                          <th>Biaya Kirim</th>
+                          <th>Estimasi</th>
+                        </thead>
+                        <tbody>';
+                foreach ($data->results as $name => $value) 
+	              {
+                  echo '<tr>';
+                  echo '<td>' . $value->{'Produk'} .'</td>';
+            			echo '<td>' . $value->{'Daerah Tujuan'} .'</td>';
+                  echo '<td>' . $value->{'Kabupaten / Kota'} .'</td>';
+                	echo '<td>' . $value->{'Biaya_Kirim'} .'</td>';
+            	    echo '<td>' . $value->{'Estimasi'} .'</td>';
+        	    		echo '</tr>';              
+                }
+                echo '</tbody>
+                    </table>
+                  </div>
+                </div>';
+              }
+              else
+              {
+                echo '<a href="'.$website.'?m=1" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
+                Message: '.$data->{'message'};
+              }
+            }
+          }
+          else 
+          {
+            echo '<form method="get" action="'.$_SERVER['PHP_SELF'].'">
+              <div class="form-group" hidden>
+                <input name="m" type="text" class="form-control text-uppercase origin" value="1">
+              </div>
+              <div class="form-group">
+                <label>Origin</label>
+                <input name="origin" type="text" class="form-control text-uppercase origin" placeholder="KOTA ANDA" value="" required>
+              </div>
+              <div class="form-group">
+                <label>Destinasi</label>
+                <input name="destinasi" type="text" class="form-control text-uppercase destinasi" placeholder="KOTA / KABUPATEN" value="" required>
+              </div>
+              <div class="form-group">
+                  <label>Berat Kg</label>
+                  <input name="berat" type="text" class="form-control text-uppercase destinasi" placeholder="1" value="1" required>
+             </div>
+             <div class="form-group text-center">
+                  <input name="submittarif" type="submit" class="btn btn-primary col-md-12 col-xs-12" value="CEK TARIF"></input>
+             </div>
+           </form>';
+          }
+        ?>
         </div>
         
         <!-- TAB RESI -->
         <div role="tabpanel" class="tab-pane <?php if($_GET['m']==2) echo 'active';?>" id="resi">
           <br>
-          <div class="form-group">
-            <label>No Resi / Connote</label>
-            <input name="connote" type="text" class="form-control border-input text-uppercase" placeholder="No Resi / Connote Anda" value="" maxlength="12" required>
-          </div>
-          <div class="form-group text-center">
-            <input name="submitconnote" type="submit" class="btn btn-primary col-md-12 col-xs-12" value="CEK RESI"></input>
-          </div>
-        </div> 
-      </div>
+          <?php if(isset($_GET['submitconnote'])) 
+          {
+            $url = $api."?mode=statusconnote&connote=".$_GET['connote']."";	
+          	$data = json_decode(curl_get_contents($url));
+          	if (!empty($data))
+            {
+              if ($data->{'status'} == "success")
+              {
+                echo '<a href="'.$website.'?m=2" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a>
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr><td>No Connote</td> <td>: '.$data->results[0]->{'Connote'}.'</td></tr>
+                          <tr><td>Referensi ID</td> <td>: '.$data->results[0]->{'ReferensiID'}.'</td></tr>
+                          <tr><td>Origin</td> <td>: '.$data->results[0]->{'Origin'}.'</td></tr>
+                          <tr><td>Daerah Tujuan</td> <td>: '.$data->results[0]->{'Destinasi'}.'</td></tr>
+                          <tr><td>Kel. / Kab. Tujuan</td> <td>: '.$data->results[0]->{'Tujuan'}.'</td></tr>
+                          <tr><td>Produk / Service</td> <td>: '.$data->results[0]->{'Produk'}.'</td></tr>
+                          <tr><td>No Polis</td> <td>: '.$data->results[0]->{'No Polis'}.'</td></tr>
+                          <tr><td>Status Delivery</td> <td>: <b>'.$data->results[0]->{'Status Delivery'}.'</b></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>';
+              }
+              else
+              {
+                echo '<a href="'.$website.'?m=2" alt="Kembali ke Halaman Awal"><< Kembali ke Halaman Awal</a><br>
+                Message: '.$data->{'message'};
+              }
+            }
+          }
+          else
+          {
+            echo '<form method="get" action="'.$_SERVER['PHP_SELF'].'"> 
+            <div class="form-group" hidden>
+              <input name="m" type="text" class="form-control text-uppercase origin" value="2">
+            </div>
+            <div class="form-group">
+              <label>No Resi / Connote</label>
+              <input name="connote" type="text" class="form-control border-input text-uppercase" placeholder="No Resi / Connote Anda" value="" maxlength="12" required>
+            </div>
+            <div class="form-group text-center">
+              <input name="submitconnote" type="submit" class="btn btn-primary col-md-12 col-xs-12" value="CEK RESI"></input>
+            </div>
+          </form>';
+          }
+          ?>
 
-    </div>
+        </div>
+
+      </div>
 
     </div> <!-- /container -->
 
@@ -130,7 +202,7 @@ include 'config.php';
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     <!-- Start JQuery untuk completion-->
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>    
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script> 
 		<script type="text/javascript">
 		$(function() {
     

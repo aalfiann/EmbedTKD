@@ -15,7 +15,7 @@ $api = "https://api.tkd.co.id/v2/";
 
 //Change this to true if website using ssl
 $ssl = false;
-$website = Protocol($ssl);
+$website = Protocol($ssl,'EmbedTKD');
 
 //Show all error
 error_reporting(E_ALL);
